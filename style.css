@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Fortnite';
-    src: url('assets/fortnite-font.ttf') format('truetype');
+    src: url('assets/fortnite-font.ttf?v=1') format('truetype');
 }
 
 body {
