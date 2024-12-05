@@ -33,12 +33,19 @@ const quotes = [
 
 let usedQuotes = [];
 let isMusicPlaying = false;
-const audio = new Audio('radio-sound.mp3');
-audio.volume = 0.5; // Lower the volume of the radio sound effect
-const backgroundMusic = new Audio('background-music.mp3');
+const audio = new Audio('assets/radio-sound.mp3');
+audio.volume = 0.5;
+const backgroundMusic = new Audio('assets/background-music.mp3');
 backgroundMusic.loop = true;
-backgroundMusic.pause(); // Ensure the background music is paused by default
-document.getElementById('music-icon').src = 'no-music-icon.png'; // Set the default icon to muted
+backgroundMusic.pause();
+document.getElementById('music-icon').src = 'assets/no-music-icon.png';
+
+const wallpapers = [
+    'assets/wallpaper-1.jpg',
+    'assets/wallpaper-2.jpg',
+    'assets/wallpaper-3.jpg'
+];
+let lastWallpaper = '';
 
 document.getElementById('steve').addEventListener('click', () => {
     audio.play();
@@ -56,16 +63,24 @@ document.getElementById('steve').addEventListener('click', () => {
     document.getElementById('quote').innerText = quote;
     document.querySelector('.bubble').style.display = 'block';
     document.getElementById('instruction').style.display = 'none';
+
+    let randomWallpaper;
+    do {
+        randomWallpaper = wallpapers[Math.floor(Math.random() * wallpapers.length)];
+    } while (randomWallpaper === lastWallpaper);
+
+    lastWallpaper = randomWallpaper;
+    document.body.style.backgroundImage = `url(${randomWallpaper})`;
 });
 
 document.getElementById('music-toggle').addEventListener('click', () => {
     const musicIcon = document.getElementById('music-icon');
     if (isMusicPlaying) {
         backgroundMusic.pause();
-        musicIcon.src = 'no-music-icon.png';
+        musicIcon.src = 'assets/no-music-icon.png';
     } else {
         backgroundMusic.play();
-        musicIcon.src = 'music-icon.png';
+        musicIcon.src = 'assets/music-icon.png';
     }
     isMusicPlaying = !isMusicPlaying;
 });
